@@ -1,0 +1,77 @@
+'use server'
+
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+
+import { createClient } from '@/utils/supabase/server'
+import { prisma } from '@/utils/prisma'
+import { hashPassword } from '@/utils/helper'
+
+export async function login(formData: FormData) {
+  const supabase = await createClient()
+
+  const data = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  }
+  const { data:session,error } = await supabase.auth.signInWithPassword(data)
+
+  console.log("storeage token",session.session?.access_token);
+  if (error) {
+    redirect('/error')
+  }
+
+  revalidatePath('/', 'layout')
+  redirect('/')
+}
+
+export async function signup(formData: FormData) {
+  const supabase = await createClient();
+
+  // Extract form data
+  const email = formData.get('email') as string;
+  const passwords = formData.get('password') as string;
+  const confirmPassword = formData.get('confirmPassword') as string;
+  const fullName = formData.get('fullName') as string;
+  const shopName = formData.get('shopName') as string;
+  const businessType = formData.get('businessType') as string;
+  const phone = formData.get('phone') as string;
+  const username = formData.get('username') as string || "nbrk_user";
+
+  // Hash the password
+  const secure_password = await hashPassword({ code: passwords, saltRounds: 10 });
+
+  // First save user to Prisma (the database)
+  try {
+    await prisma.user.create({
+      data: {
+        fullName,
+        shopName,
+        businessType,
+        email,
+        username,
+        phone,
+        password: secure_password, // Hash the password before saving it
+      }
+    });
+  } catch (error) {
+    console.error("Error creating user in Prisma:", error);
+    return redirect('/error');
+  }
+
+  // Then register the user in Supabase Auth
+  const { error } = await supabase.auth.signUp({
+    email,
+    password: passwords, // Supabase handles password hashing internally]
+
+  });
+
+  if (error) {
+    console.error("Error signing up with Supabase:", error.message);
+    return redirect('/error');
+  }
+
+  // Successfully signed up, redirect to homepage
+  revalidatePath('/', 'layout');
+  redirect('/');
+}
