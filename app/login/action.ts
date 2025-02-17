@@ -2,19 +2,16 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-
-import { createClient } from '@/utils/supabase/server'
 import { prisma } from '@/utils/prisma'
 import { hashPassword } from '@/utils/helper'
+import { supbase } from '@/utils/supabase/client'
 
 export async function login(formData: FormData) {
-  const supabase = await createClient()
-
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   }
-  const { data:session,error } = await supabase.auth.signInWithPassword(data)
+  const { data:session,error } = await supbase.auth.signInWithPassword(data)
 
   console.log("storeage token",session.session?.access_token);
   if (error) {
@@ -26,7 +23,6 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
-  const supabase = await createClient();
 
   // Extract form data
   const email = formData.get('email') as string;
@@ -37,6 +33,8 @@ export async function signup(formData: FormData) {
   const businessType = formData.get('businessType') as string;
   const phone = formData.get('phone') as string;
   const username = formData.get('username') as string || "nbrk_user";
+
+  console.log(fullName,shopName,businessType,phone,username,"frontend info")
 
   // Hash the password
   const secure_password = await hashPassword({ code: passwords, saltRounds: 10 });
@@ -60,7 +58,7 @@ export async function signup(formData: FormData) {
   }
 
   // Then register the user in Supabase Auth
-  const { error } = await supabase.auth.signUp({
+  const { error } = await supbase.auth.signUp({
     email,
     password: passwords, // Supabase handles password hashing internally]
 
