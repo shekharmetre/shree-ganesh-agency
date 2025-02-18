@@ -1,115 +1,164 @@
-"use client";
-import { useState } from "react";
+import React from 'react';
+import { Heart, Star, ShoppingCart, Shield, Clock, Award, Sparkles, ArrowRight } from 'lucide-react';
 
-export type Discount = {
-  percentage: number;
-  expiryDate: string;
-};
-
-export type CartItem = {
-  id: number;
-  name: string;
-  srcUrl: string;
-  price: number;
-  attributes: string[];
-  discount: Discount;
-  quantity: number;
-};
-
-interface CartPageProps {
-  initialCartItems: CartItem[];
-}
-
-export default function CartPage({ initialCartItems }: CartPageProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
-
-  function removeCart(itemId: number) {
-    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
+const products = [
+  {
+    id: 1,
+    name: "Premium Blood Pressure Monitor",
+    price: 129.99,
+    rating: 4.8,
+    image: "https://images.unsplash.com/photo-1631815589068-dc4f81d4d10f?auto=format&fit=crop&q=80&w=400",
+    description: "Professional-grade blood pressure monitoring device with smart connectivity",
+    offer: "15% OFF",
+    features: ["Bluetooth Connected", "App Support", "Memory Storage"],
+    badge: "Best Seller"
+  },
+  {
+    id: 2,
+    name: "Digital Thermometer Pro",
+    price: 49.99,
+    rating: 4.5,
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=400",
+    description: "Infrared digital thermometer with instant readings and fever alert",
+    offer: "Free Shipping",
+    features: ["Instant Reading", "Fever Alert", "Memory Recall"],
+    badge: "New"
+  },
+  {
+    id: 3,
+    name: "Smart Pulse Oximeter",
+    price: 79.99,
+    rating: 4.7,
+    image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?auto=format&fit=crop&q=80&w=400",
+    description: "Advanced SpO2 and pulse rate monitoring with OLED display",
+    offer: "Buy 1 Get 1 50% OFF",
+    features: ["OLED Display", "24/7 Monitoring", "USB Rechargeable"],
+    badge: "Popular"
+  },
+  {
+    id: 4,
+    name: "Advanced Glucose Monitor",
+    price: 159.99,
+    rating: 4.9,
+    image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=400",
+    description: "Smart glucose monitoring system with continuous tracking",
+    offer: "20% OFF First Purchase",
+    features: ["Continuous Monitoring", "Mobile App", "Alert System"],
+    badge: "Premium"
   }
+];
 
+function App() {
   return (
-    <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
-      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-          Shopping Cart
-        </h2>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Header */}
+      <header className="py-8 px-4 mb-8">
+        <div className="container mx-auto">
+          <h1 className="text-4xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Medical Innovations
+          </h1>
+          <p className="text-center text-gray-600 mt-2">Discover Premium Healthcare Solutions</p>
+        </div>
+      </header>
 
-        <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
-          <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
-            <div className="space-y-6">
-              {cartItems.length > 0 ? (
-                cartItems.map((item) => (
-                  <div
-                    key={item.id}
-                    className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6"
-                  >
-                    <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                      <a href="#" className="shrink-0 md:order-1">
-                        <img
-                          className="h-20 w-20 dark:hidden"
-                          src={item.srcUrl}
-                          alt={item.name}
-                        />
-                        <img
-                          className="hidden h-20 w-20 dark:block"
-                          src={item.srcUrl}
-                          alt={item.name}
-                        />
-                      </a>
+      {/* Products Section */}
+      <div className="container mx-auto px-4">
+        <div className="overflow-x-auto pb-6 custom-scrollbar-light">
+          <div className="flex space-x-6 min-w-max pb-4">
+            {products.map((product) => (
+              <div 
+                key={product.id} 
+                className="w-[340px] bg-white rounded-[2rem] overflow-hidden group relative"
+                style={{
+                  boxShadow: '0 10px 40px -12px rgba(0,0,0,0.1)',
+                }}
+              >
+                {/* Image Container */}
+                <div className="relative h-56">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5" />
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Curved overlay */}
+                  <div className="absolute -bottom-3 left-0 right-0 h-12 bg-white"
+                       style={{
+                         borderTopLeftRadius: '50% 100%',
+                         borderTopRightRadius: '50% 100%',
+                       }} />
+                  {/* Badge */}
+                  {product.badge && (
+                    <div className="absolute top-4 left-4 flex items-center space-x-1 bg-white/95 backdrop-blur px-3 py-1 rounded-full shadow-lg">
+                      <Sparkles className="w-4 h-4 text-blue-500" />
+                      <span className="text-sm font-medium text-gray-700">{product.badge}</span>
+                    </div>
+                  )}
+                  {/* Wishlist Button */}
+                  <button className="absolute top-4 right-4 bg-white/95 p-2 rounded-full shadow-lg hover:scale-110 transition-transform">
+                    <Heart className="w-5 h-5 text-gray-600 hover:text-red-500 transition-colors" />
+                  </button>
+                  {/* Offer Tag */}
+                  {product.offer && (
+                    <div className="absolute bottom-8 right-4 bg-blue-500 text-white px-4 py-1.5 rounded-full text-sm font-medium transform rotate-2 shadow-lg">
+                      {product.offer}
+                    </div>
+                  )}
+                </div>
 
-                      <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                        <a
-                          href="#"
-                          className="text-base font-semibold text-gray-900 hover:underline dark:text-white"
-                        >
-                          {item.name}
-                        </a>
-
-                        <div className="flex items-center gap-4">
-                          <button
-                            type="button"
-                            onClick={() => removeCart(item.id)}
-                            className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
-                          >
-                            <svg
-                              className="me-1.5 h-5 w-5"
-                              aria-hidden="true"
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M6 18 17.94 6M18 18 6.06 6"
-                              />
-                            </svg>
-                            Remove
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="text-end md:order-4 md:w-32">
-                        <p className="text-base font-bold text-gray-900 dark:text-white">
-                          ${item.price}
-                        </p>
-                      </div>
+                {/* Content */}
+                <div className="p-6">
+                  {/* Rating and Price */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                      <span className="ml-1.5 font-medium text-gray-700">{product.rating}</span>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-gray-900">${product.price}</div>
                     </div>
                   </div>
-                ))
-              ) : (
-                <p className="text-center text-gray-500 dark:text-gray-400">
-                  Your cart is empty.
-                </p>
-              )}
-            </div>
+
+                  {/* Title and Description */}
+                  <h2 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h2>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
+
+                  {/* Features */}
+                  <div className="space-y-2 mb-6">
+                    {product.features.map((feature, index) => (
+                      <div key={index} className="flex items-center text-sm text-gray-700">
+                        <Shield className="w-4 h-4 mr-2 text-blue-500" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white py-3.5 rounded-2xl flex items-center justify-center group/btn relative overflow-hidden shadow-lg">
+                    <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+                    <ShoppingCart className="w-5 h-5 mr-2" />
+                    <span className="font-medium">Add to Cart</span>
+                  </button>
+
+                  {/* Footer */}
+                  <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+                    <div className="flex items-center text-sm text-gray-500">
+                      <Clock className="w-4 h-4 mr-1.5 text-blue-500" />
+                      Fast Delivery
+                    </div>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <Award className="w-4 h-4 mr-1.5 text-blue-500" />
+                      Certified
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
+
+export default App;
