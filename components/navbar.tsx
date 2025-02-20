@@ -1,5 +1,5 @@
 
-import { Bell, Heart, Search, ShoppingCartIcon, User, User2 } from 'lucide-react';
+import { Bell,User2 } from 'lucide-react';
 import React from 'react';
 import { DropdownMenuDemo } from './ui/drop-downWrapper';
 import { CardDemo } from './ui/notification';
@@ -8,6 +8,7 @@ import { supbase } from '@/utils/supabase/client';
 import { ButtonRedirect } from './ui/redirectbutton';
 import Link from 'next/link';
 import { ShopppingCart } from './navbar/shoppingCart';
+import Image from 'next/image';
 
 const notifications = [
     {
@@ -27,7 +28,7 @@ const notifications = [
 export async function Navbar() {
     // console.log(supbase.auth.getUser())
     const { data: { user } } = await supbase.auth.getUser();
-
+console.log(user);
     return (
         <header className="bg-gray-100  md:py-0 sticky md:top-0 top-0 z-50">
             <div className="container mx-auto px-4  bg-transparent flex items-center">
@@ -35,7 +36,8 @@ export async function Navbar() {
                 <div className="flex items-center w-full">
                     {/* logo */}
                     <div className="mr-auto md:w-36 py-2 ml-10 md:ml-0 flex-shrink-0">
-                        <img className="w-full" src="/logo.svg" alt="" />
+                        {/* <img className="w-full" src="/logo.svg" alt="" /> */}
+                        <Image className="w-full" width={100} height={100} src="/logo.svg" alt="" />
                     </div>
                     {/* phone number */}
                     <div className="ml-auto md:w-48 hidden sm:flex flex-col place-items-end">

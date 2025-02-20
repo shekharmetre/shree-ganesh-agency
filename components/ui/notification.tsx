@@ -36,7 +36,7 @@ type Notification = {
     notifications: Notification[];
   };
  
-type CardProps = React.ComponentProps<typeof Card>
+// type CardProps = React.ComponentProps<typeof Card>
  
 export function CardDemo({notifications}: NotificationsProps) {
   return (

@@ -52,4 +52,8 @@ const InputGroupText = ({ className, children }: InputGroupProps) => {
 InputGroup.Text = InputGroupText;
 InputGroup.Input = Input;
 
+InputGroup.displayName = "InputGroup";
+Input.displayName = "Input";
+InputGroupText.displayName = "InputGroupText";
+
 export default InputGroup;

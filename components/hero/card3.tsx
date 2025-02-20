@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { Package, Shield, Gift, Pill, Timer, Star, Plus, ArrowRight } from 'lucide-react';
+import { Package, Gift } from 'lucide-react';
 import React from 'react';
 
 const ProductCard = ({ 
-  layout, 
+  // layout, 
   title, 
   image, 
   price, 
@@ -23,13 +23,13 @@ const ProductCard = ({
   packSize: string;
   freebie?: string;
 }) => {
-  const layouts = {
-    1: "bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200",
-    2: "bg-gradient-to-r from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200",
-    3: "bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100 hover:to-green-200",
-    4: "bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200",
-    5: "bg-gradient-to-r from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200"
-  };
+  // const layouts = {
+  //   1: "bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200",
+  //   2: "bg-gradient-to-r from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200",
+  //   3: "bg-gradient-to-r from-green-50 to-green-100 hover:from-green-100 hover:to-green-200",
+  //   4: "bg-gradient-to-r from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200",
+  //   5: "bg-gradient-to-r from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200"
+  // };
 
   return (
     <motion.div

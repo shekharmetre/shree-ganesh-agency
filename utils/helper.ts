@@ -31,6 +31,13 @@ export const comparePassword = async (
 };
 
 
+export function isExpired(expiryTimestamp: string): boolean {
+  const expiresAtUTC = new Date(expiryTimestamp);
+  return new Date() > expiresAtUTC;
+}
+
+
+
 
 
 

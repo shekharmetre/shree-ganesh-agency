@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { MedicineRow } from "./medicine-row";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Button } from "primereact/button";
 import { Search } from "lucide-react";
@@ -26,11 +26,11 @@ const medications = Array(20).fill({
 
 export const fetchProducts = async () => {
     try {
-        const response = await axios.get("http://192.168.52.44:3000/api/products-data")
+        const response = await axios.get("/api/products-data")
         localStorage.setItem("lastFetchDate", new Date().toISOString());
         return medications;  // Make sure to return the response
     } catch (error) {
-        throw error; 
+        throw error;
     }
 };
 
@@ -38,7 +38,7 @@ export const ProductPage = () => {
     const lastFetchDate = localStorage.getItem("lastFetchDate");
     const today = new Date().toDateString();
     const isNewDay = !lastFetchDate || new Date(lastFetchDate).toDateString() !== today;
-    const { isLoading, isError, data, error, refetch, isFetching } = useQuery({
+    const { isLoading, isError, data, refetch, } = useQuery({
         queryKey: ['fetchProducts'],  // Add inputValue to the query key to trigger refetch when it changes
         queryFn: () => fetchProducts(),
         staleTime: isNewDay ? 0 : 1000 * 60 * 60 * 24,
@@ -48,8 +48,6 @@ export const ProductPage = () => {
     const [visibleItems, setVisibleItems] = useState(50); // Show first 20 items
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredData, setFilteredData] = useState<any[]>([]);
-    const [isBottom, setIsBottom] = useState(false);
-    const { ref: lastItemRef, inView } = useInView({ threshold: 0.5 });
 
 
 
@@ -70,7 +68,10 @@ export const ProductPage = () => {
 
 
     const LoadMore = () => {
-        setVisibleItems((prev) => Math.min(prev + 20, data.length));
+        if (data) {
+            setVisibleItems((prev) => Math.min(prev + 20, data.length));
+        }
+
     };
 
 
@@ -94,7 +95,7 @@ export const ProductPage = () => {
                         type="text"
                         placeholder="Search product..."
                         className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)}
+                        value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
                 <div className="md:hidden text-gray-700 font-semibold uppercase text-md mt-5">
@@ -106,7 +107,7 @@ export const ProductPage = () => {
 
             <div className="overflow-y-auto m-auto max-h-[calc(100vh-4rem)]">
                 {filteredData.slice(0, visibleItems).map((medicine: any, index: number) => {
-                    const isLastItem = index === filteredData.length - 1;
+                    // const isLastItem = index === filteredData.length - 1;
                     return (
                         <div key={medicine.id}>
                             <MedicineRow medicine={medicine} />

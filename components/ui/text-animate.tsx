@@ -376,6 +376,7 @@ export function TextAnimate({
               by === "line" ? "block" : "inline-block whitespace-pre",
               segmentClassName,
             )}
+            
           >
             {segment}
           </motion.span>

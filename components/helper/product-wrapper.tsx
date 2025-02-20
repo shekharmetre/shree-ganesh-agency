@@ -17,10 +17,10 @@ export function ProductWrapper({
     scrollable = false,
     children,
     className = '',
-    header = "Today's Best Offer",
-    headerClass = "md:text-4xl text-2xl font-semibold font-serif",
-    view = false,
-    onclick,
+    // header = "Today's Best Offer",
+    // headerClass = "md:text-4xl text-2xl font-semibold font-serif",
+    // view = false,
+    // onclick,
     title,
     subTitle
 }: ProductWrapperProps) {

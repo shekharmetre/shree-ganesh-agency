@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { login } from "./action";
 import Form from "next/form"
+import Image from "next/image";
+import { GuestLOgin } from "@/components/guest-login";
 const LoginPage: React.FC = () => {
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col  justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <Link href="#" className="flex justify-between mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img
-            className="w-28"
-            src="/logo.svg"
-            alt="logo"
-          />
+          <Image src="/logo.svg" width={100} height={100} alt="logo"  className="w-28"  />
         </Link>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -55,6 +53,7 @@ const LoginPage: React.FC = () => {
               >
                 Sign in
               </button>
+              <GuestLOgin />
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <Link href="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">

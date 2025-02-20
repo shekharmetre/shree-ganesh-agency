@@ -2,18 +2,25 @@
 
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { prisma } from '@/utils/prisma'
+
+import { createClient } from '@/utils/supabase/server'
 import { hashPassword } from '@/utils/helper'
-import { supbase } from '@/utils/supabase/client'
+import { prisma } from '@/utils/prisma'
 
 export async function login(formData: FormData) {
+  const supabase = await createClient()
+
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   }
-  const { data:session,error } = await supbase.auth.signInWithPassword(data)
 
-  console.log("storeage token",session.session?.access_token);
+  console.log(data);
+
+  const { error } = await supabase.auth.signInWithPassword(data)
+
   if (error) {
     redirect('/error')
   }
@@ -23,11 +30,10 @@ export async function login(formData: FormData) {
 }
 
 export async function signup(formData: FormData) {
-
+  const supabase = await createClient()
   // Extract form data
   const email = formData.get('email') as string;
   const passwords = formData.get('password') as string;
-  const confirmPassword = formData.get('confirmPassword') as string;
   const fullName = formData.get('fullName') as string;
   const shopName = formData.get('shopName') as string;
   const businessType = formData.get('businessType') as string;
@@ -49,7 +55,9 @@ export async function signup(formData: FormData) {
         email,
         username,
         phone,
-        password: secure_password, // Hash the password before saving it
+        password :secure_password,
+        authorId : "ef85a124-3716-445c-a383-9e4b81bad0bf"
+     // Hash the password before saving it
       }
     });
   } catch (error) {
@@ -58,7 +66,7 @@ export async function signup(formData: FormData) {
   }
 
   // Then register the user in Supabase Auth
-  const { error } = await supbase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password: passwords, // Supabase handles password hashing internally]
 

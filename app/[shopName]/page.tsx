@@ -1,20 +1,7 @@
 import LiveOrderSummary from "@/components/ShopPage/live-order";
-import { MedicineRow } from "@/components/ShopPage/medicine-row";
 import { ProductPage } from "@/components/ShopPage/product-page";
 import { HeroShop } from "@/components/ShopPage/shop-hero";
-import axios from "axios";
 
-
-
-
-async function getMedicines() {
-    try {
-        const response = await axios.get("http://localhost:3000/api/data?limit=30");
-        return response.data
-    } catch (error) {
-        console.log(error);
-    }
-}
 
 export default async function ShopName() {
     return (
@@ -27,7 +14,7 @@ export default async function ShopName() {
 
             </div>
             <div className="hidden md:block">
-                {/* <LiveOrderSummary /> */}
+                <LiveOrderSummary />
             </div>
         </div>
     )

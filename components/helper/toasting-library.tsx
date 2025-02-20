@@ -1,3 +1,3 @@
-export function SetErrorMessage(error:String){
+export function SetErrorMessage(error:string){
     console.log("errro message:",error);
 }

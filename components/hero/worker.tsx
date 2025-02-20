@@ -50,8 +50,11 @@ export function Worker(){
                 <h1 className="md:text-7xl text-2xl text-center my-5 text-[#7961DC] md:max-w-7xl m-auto font-extrabold">Trusted Professionals for Your Pharma Orders</h1>
                 <div className="flex justify-between overflow-x-auto gap-5">
                 {pharmaDistributorWorkers.map((item,index)=>(
+                  <div key={index}>
                     <Image src={item.image} alt={item.name} width={200} height={200} className="w-full hover:scale-105 hover:shadow-sm hover:shadow-black cursor-pointer duration-150 ease-linear" />
+                    </div>
                 ))}
+                
                  </div>
         </div>
     )

@@ -2,8 +2,6 @@
 import React from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-
 
 
 interface Medication {

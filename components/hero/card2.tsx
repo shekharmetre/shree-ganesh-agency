@@ -1,6 +1,6 @@
 import { calculateDiscountedPrice } from "@/lib/utils";
 import Image from "next/image";
-import AddToCartBtn from "../Tabs/AddToCartBtn";
+// import AddToCartBtn from "../Tabs/AddToCartBtn";
 
 interface ProductProps {
     id: number; // Changed from key to id
@@ -19,12 +19,12 @@ export function Product({
     discount = 6,
     scrollable,
     image = "/placeholder.png", // Added a fallback image
-    category = "Uncategorized", // Default category
+    // category = "Uncategorized", // Default categor
 }: ProductProps) {
     const discountedPrice = calculateDiscountedPrice(price, discount);
 
     return (
-        <div className={`${scrollable ? "flex-grow flex-shrink-0 md:basis-[15%] basis-[60%]" : "w-full"} 
+        <div key={id} className={`${scrollable ? "flex-grow flex-shrink-0 md:basis-[15%] basis-[60%]" : "w-full"} 
       text-black px-2 md:p-5 cursor-pointer flex flex-col justify-between rounded-md min-h-[220px]
          hover:scale-105 hover:shadow-lg transition-transform duration-300 ease-in-out`}>
             

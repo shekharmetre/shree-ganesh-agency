@@ -27,6 +27,7 @@ export async function GET(req: NextRequest) {
             hasNextPage: offset + limit < data.length,
         });
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: "Failed to load data" }, { status: 500 });
     }
 }

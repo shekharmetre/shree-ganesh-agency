@@ -2,8 +2,6 @@
 import { useState } from "react"
 import { Menu, X, LayoutDashboard, Keyboard, Eye, Calendar, Info, Wrench, Phone, MessageSquare, Facebook, Twitter, Instagram, Youtube } from "lucide-react"
 import Link from "next/link"
-import { Navbar } from "./navbar"
-
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
 

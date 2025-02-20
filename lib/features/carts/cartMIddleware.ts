@@ -8,6 +8,7 @@ const cartListenerMiddleware = createListenerMiddleware();
 cartListenerMiddleware.startListening({
   actionCreator: addToCart,
   effect: async (action) => {
+    console.log(action);
     ToastMessage("Success!", "Item added to cart!", "/cart");
   },
 });
@@ -16,6 +17,7 @@ cartListenerMiddleware.startListening({
 cartListenerMiddleware.startListening({
   actionCreator: removeCartItem,
   effect: async (action) => {
+    console.log(action)
     ToastMessage("Removed", "Item removed from cart.");
   },
 });
@@ -24,6 +26,7 @@ cartListenerMiddleware.startListening({
 cartListenerMiddleware.startListening({
   actionCreator: remove,
   effect: async (action) => {
+    console.log(action)
     ToastMessage("Deleted", "Item completely removed from cart.");
   },
 });

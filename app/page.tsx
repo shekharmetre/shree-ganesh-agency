@@ -5,7 +5,6 @@ import { TextAnimate } from "@/components/ui/text-animate";
 import AboutUsSection from "@/components/hero/aboutUs";
 import { Offers } from "@/components/offers";
 import { ProductWrapper } from "@/components/helper/product-wrapper";
-import { ProductCard2 } from "@/components/hero/card1";
 import { Product } from "@/components/hero/card2";
 import { Worker } from "@/components/hero/worker";
 import { Footer } from "@/components/hero/footer";

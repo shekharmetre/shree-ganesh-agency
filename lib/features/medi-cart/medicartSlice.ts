@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { ToastMessage } from "../ToastMessage";
 
-const calculateTotalPrice = (
-  totalPrice: number,
-  data: Medication,
-  quantity?: number
-): number => {
-  return totalPrice + data.pricePerUnit * (quantity ? quantity : data.quantity);
-};
+// const calculateTotalPrice = (
+//   totalPrice: number,
+//   data: Medication,
+//   quantity?: number
+// ): number => {
+//   return totalPrice + data.pricePerUnit * (quantity ? quantity : data.quantity);
+// };
 
 export type RemoveMedicationItem = {
   id: number;

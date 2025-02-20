@@ -1,3 +1,4 @@
+import { isExpired } from "@/utils/helper";
 import {  sendOtpEmail } from "@/utils/helper/server-helper";
 import { prisma } from "@/utils/prisma";
 import { supbase } from "@/utils/supabase/client";
@@ -85,11 +86,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-
-function isExpired(expiryTimestamp: string): boolean {
-  const expiresAtUTC = new Date(expiryTimestamp);
-  return new Date() > expiresAtUTC;
-}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

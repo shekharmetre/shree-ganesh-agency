@@ -156,7 +156,7 @@ export function MedicineRow({ medicine }: MedicineRowProps) {
               <button 
                 className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
                 onClick={(e) => {
-                    // e.stopPropagation()
+                    e.stopPropagation()
                     dispatch(addToCart(medicine))
                 }}
               >

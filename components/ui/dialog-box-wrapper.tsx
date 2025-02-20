@@ -4,20 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import EmailVerification from "../helper/verification/mobile-otp-verfiication";
 import { apiRequest } from "@/utils/helper/api-client";
 
-export default function OpenDialog() {
+const OpenDialog = () => {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const [inputValue, setInputValue] = useState("");
 
-    const openDialog = () => {
-        dialogRef.current?.showModal();
-    };
+    // const openDialog = () => {
+    //     dialogRef.current?.showModal();
+    // };
 
     const closeDialog = () => {
         dialogRef.current?.close();
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        
         const value = e.target.value;
         setInputValue(value);
     };
@@ -30,9 +29,8 @@ export default function OpenDialog() {
                     method: "POST",
                     data: { number: inputValue },
                 });
-                console.log("successfully send to otp")
+                console.log("Successfully sent OTP",response);
             } catch (error) {
-                // setMessage("Error creating user.");
                 console.log(error);
             }
         };
@@ -45,7 +43,7 @@ export default function OpenDialog() {
     return (
         <div>
             {/* Input Field */}
-            <div className="">
+            <div>
                 <div className="relative">
                     <input
                         id="username"
@@ -57,19 +55,24 @@ export default function OpenDialog() {
                         maxLength={10}
                     />
                     <label
-                        for="username"
+                        htmlFor="username"
                         className="absolute left-0 top-1 cursor-text peer-focus:text-xs peer-focus:-top-4 transition-all peer-focus:text-blue-700"
-                    >Agent Verification</label
                     >
+                        Agent Verification
+                    </label>
                 </div>
             </div>
 
-
             {/* Native HTML Dialog */}
             <dialog ref={dialogRef}>
-                <button onClick={closeDialog} className="flex justify-end items-ends">✖</button>
-                <EmailVerification mobileNumber={inputValue} />
+                <button onClick={closeDialog} className="flex justify-end items-end">✖</button>
+                <EmailVerification agentEmail="nothing" closeDialog={()=>{}} mobileNumber={inputValue} />
             </dialog>
         </div>
     );
-}
+};
+
+// Fix: Explicitly set displayName
+OpenDialog.displayName = "OpenDialog";
+
+export default OpenDialog;

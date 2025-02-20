@@ -5,7 +5,7 @@ import { ShoppingCartIcon } from "lucide-react";
 import Link from "next/link";
 
 export function ShopppingCart() {
-      const { cart, totalPrice, adjustedTotalPrice } = useAppSelector(
+      const { cart, } = useAppSelector(
         (state: RootState) => state.carts
       );
     

@@ -1,6 +1,7 @@
 import React from "react";
 import { NumberTicker } from "../ui/number-ticker";
 import { LeftToRightMove } from "../helper/framerWrapper";
+import Image from "next/image";
 
 const AboutUsSection: React.FC = () => {
   return (
@@ -62,7 +63,8 @@ const AboutUsSection: React.FC = () => {
           {/* Right Section - Image */}
           <div className="w-full lg:justify-start justify-center items-start flex">
             <div className="sm:w-[564px] w-full sm:h-[646px] h-full sm:bg-gray-100 rounded-3xl sm:border border-gray-200 relative">
-              <img className="sm:mt-5 sm:ml-5 w-full md:h-full h-[40vh] rounded-3xl object-cover" src="/hero/production.png" alt="about Us image" />
+              {/* <img className="sm:mt-5 sm:ml-5 w-full md:h-full h-[40vh] rounded-3xl object-cover" src="/hero/production.png" alt="about Us image" /> */}
+              <Image  className="sm:mt-5 sm:ml-5 w-full md:h-full h-[40vh] rounded-3xl object-cover" src="/hero/production.png" width={100} height={100} alt="about Us image"  />
             </div>
           </div>
         </div>

@@ -28,7 +28,7 @@ export interface CartItem {
   expiryDate: string;
   quantity: number;
   category: string;
-  discount: Discount;
+  discount?: Discount;
 }
 
 export type Cart = {
@@ -94,13 +94,13 @@ export const cartSlice = createSlice({
 
       // Check if item is in cart
       const isItemInCart = state.cart.items.find((item) =>
-        item.id === action.payload.id && compareArrays(action.payload.attributes, item.attributes)
+        item.id === action.payload.id 
       );
 
       if (isItemInCart) {
         // Remove the item from the cart
         state.cart.items = state.cart.items.filter((item) =>
-          item.id !== action.payload.id || !compareArrays(item.attributes, action.payload.attributes)
+          item.id !== action.payload.id || !compareArrays(item.id as any, action.payload.id as any)
         );
         state.cart.totalQuantities = state.cart.items.reduce((acc, item) => acc + item.quantity, 0);
         state.totalPrice = state.cart.items.reduce((acc, item) => acc + item.pricePerUnit * item.quantity, 0);

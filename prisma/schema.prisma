@@ -13,28 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
-
-
 model Agent {
-  id       String      @id @default(uuid()) 
-  agentName     String
-  agentEmail    String
-  agentNumber   String
-  password      String
-  createdAt     DateTime @default(now())
-  users         User[]
+  id           String    @id @default(uuid())
+  agentName    String
+  agentEmail   String
+  agentNumber  String
+  password     String
+  createdAt    DateTime  @default(now())
+  users        User[]?
 }
 
 model User {
-  id             String      @id @default(uuid()) // Auto-increment ID
-  fullName       String
-  shopName       String
-  businessType   String
-  email          String  @unique
-  username       String  @unique
-  phone          String
-  password       String
-  author         Agent  @relation(fields : [authorId],references:[id])  
-  authorId       String        
-  createdAt      DateTime @default(now())
+  id           String    @id @default(uuid())
+  fullName     String
+  shopName     String
+  businessType String
+  email        String    @unique
+  username     String    @unique
+  phone        String
+  password     String     
+  createdAt    DateTime  @default(now())
+  agent        Agent?    @relation(fields: [id], references: [id])
+  agentId      String?
 }

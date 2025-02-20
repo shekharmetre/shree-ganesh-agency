@@ -55,10 +55,12 @@ export const AgentVerification = () => {
     if (data) {
       if (data.statusCode !== 200) {
         console.log(data)
-        ToastMessage("Error", data.message || "unknown error");
+        ToastMessage("Error", data.message as string || "unknown error");
+        // here why problem is there i set on api all object of error returning that's why
+      
       } else {
-        ToastMessage("success", data?.message || "Successfully sent otp")
-        setAgentEmail(data?.data?.data)
+        ToastMessage("success", data?.message as string || "Successfully sent otp")
+        setAgentEmail(data?.data)
         // setAgentEmail(data.data);
         setIsDialogOpen(true); // Open dialog if API call succeeds
         dialogRef.current?.showModal()
@@ -127,7 +129,7 @@ export const AgentVerification = () => {
         {isDialogOpen && (
           <dialog ref={dialogRef}>
             <button onClick={closeDialog} className="flex justify-end items-end">✖</button>
-            <EmailVerification agentEmail={AgentEmail} closeDialog={closeDialog} mobileNumber={inputValue} />
+            <EmailVerification  agentEmail={AgentEmail as string} closeDialog={closeDialog} mobileNumber={inputValue} />
           </dialog>
         )}
       </div>

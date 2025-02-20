@@ -103,9 +103,8 @@ const LiveOrderSummary = () => {
       <div className="flex-1 overflow-auto">
         <AnimatePresence>
           {mockOrders.map((order, index) => {
-            const status = statusConfig[order.status];
-            const StatusIcon = status.icon;
-
+           const status = statusConfig[order.status as keyof typeof statusConfig];
+           const StatusIcon = status.icon;
             return (
               <motion.div
                 key={order.id}
