@@ -56,7 +56,7 @@ export async function signup(formData: FormData) {
         username,
         phone,
         password :secure_password,
-        authorId : "ef85a124-3716-445c-a383-9e4b81bad0bf"
+        // authorId : "ef85a124-3716-445c-a383-9e4b81bad0bf"
      // Hash the password before saving it
       }
     });

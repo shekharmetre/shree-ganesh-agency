@@ -20,7 +20,7 @@ model Agent {
   agentNumber  String
   password     String
   createdAt    DateTime  @default(now())
-  users        User[]?
+  users        User[]
 }
 
 model User {
