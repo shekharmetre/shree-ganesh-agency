@@ -17,7 +17,7 @@ To set up the project locally, follow these steps:
    npm run dev
 Your application will now be running locally.
 
-**Note**: If you only want to contribute to the frontend, you can remove middleware.ts in the development code.
+**Note**: If you only want to contribute to the frontend,you can just comment out middleware.ts and created dummy uncomment it.
 
 
 # pharma
