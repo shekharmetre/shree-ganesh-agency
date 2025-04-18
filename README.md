@@ -21,5 +21,4 @@ Your application will now be running locally.
 
 
 # pharma
-# shree-ganesh-agency
-# shree-ganesh-agency
+
