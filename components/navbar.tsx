@@ -1,9 +1,9 @@
 
 import { ArrowDown, Bell, ChevronDown, User2 } from 'lucide-react';
 import React from 'react';
-import { DropdownMenuDemo } from './ui/drop-downWrapper';
-import { CardDemo } from './ui/notification';
-import { Profile } from './profile';
+// import { DropdownMenuDemo } from './ui/drop-downWrapper';
+// import { CardDemo } from './ui/notification';
+// import { Profile } from './profile';
 import { supbase } from '@/utils/supabase/client';
 import { ButtonRedirect } from './ui/redirectbutton';
 import Link from 'next/link';
@@ -57,9 +57,9 @@ export async function Navbar() {
                                     <li className="ml-2 hidden lg:ml-4 relative md:inline-block">
                                         <div className="">
                                             <div className="absolute -top-4 right-0 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">0</div>
-                                            <DropdownMenuDemo triggered={<Bell className="w-6 h-6 cursor-pointer" />}>
+                                            {/* <DropdownMenuDemo triggered={<Bell className="w-6 h-6 cursor-pointer" />}>
                                                 <CardDemo notifications={notifications} />
-                                            </DropdownMenuDemo>
+                                            </DropdownMenuDemo> */}
                                         </div>
                                     </li>
 
@@ -67,9 +67,9 @@ export async function Navbar() {
                                         <div className="flex items-center gap-2 lg:gap-4">
                                             {/* User Dropdown */}
                                             <div>
-                                                <DropdownMenuDemo triggered={<User2 className="md:w-10 w-8 md:h-10 h-8" />}>
+                                                {/* <DropdownMenuDemo triggered={<User2 className="md:w-10 w-8 md:h-10 h-8" />}>
                                                     <Profile />
-                                                </DropdownMenuDemo>
+                                                </DropdownMenuDemo> */}
                                             </div>
 
                                             {/* Retailer Info */}

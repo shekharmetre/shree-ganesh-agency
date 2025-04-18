@@ -32,16 +32,27 @@ export async function middleware(request: NextRequest) {
         get(name: string) {
           return request.cookies.get(name)?.value
         },
+        set(name: string, value: string, options: any) {
+          request.cookies.set({ name, value, ...options })
+          response = NextResponse.next({
+            request: { headers: request.headers }
+          })
+          response.cookies.set({ name, value, ...options })
+        },
+        remove(name: string, options: any) {
+          request.cookies.set({ name, value: '', ...options })
+          response = NextResponse.next({ request: { headers: request.headers } })
+          response.cookies.set({ name, value: '', ...options })
+        }
       }
     }
   )
-
   // 2. Check auth session
   const { data: { user } } = await supabase.auth.getUser()
   const path = request.nextUrl.pathname
 
   // 3. Find matching protected route
-  const matchedRoute = Object.keys(protectedRoutes).find(route => 
+  const matchedRoute = Object.keys(protectedRoutes).find(route =>
     path.startsWith(route)
   )
 
@@ -54,7 +65,7 @@ export async function middleware(request: NextRequest) {
 
   // 5. Get role from cookie (set during login)
   const userRole = request.cookies.get('user_role')?.value
-  console.log("middlewa role",userRole)
+  console.log("middlewa role", userRole)
 
   // 6. If no role in cookie, redirect to unauthorized
   if (!userRole) {

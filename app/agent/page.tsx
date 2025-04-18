@@ -32,7 +32,7 @@ export default function Agent() {
                  <div className="space-y-6">
                    {/* Visit Planner */}
      
-                   <VisitPlanner />
+                   {/* <VisitPlanner /> */}
      
                    {/* Top Retailers */}
                    <TopRetailers />

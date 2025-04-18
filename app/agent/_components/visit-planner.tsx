@@ -5,7 +5,6 @@ import {
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "primereact/badge"
-import { Checkbox } from "primereact/checkbox"
 import { CheckboxItem } from "@radix-ui/react-dropdown-menu"
 
 
