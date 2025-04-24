@@ -38,7 +38,7 @@ export function ProductCategories() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {categories.map((category, index) => (
             <motion.div
-              key={index}
+              key={category.name}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}

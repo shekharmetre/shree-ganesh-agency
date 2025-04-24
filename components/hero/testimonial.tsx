@@ -129,7 +129,7 @@ export default function AutoScrollingTestimonials() {
         >
           <motion.div className="flex space-x-6" animate={controls}>
             {[...testimonials, ...testimonials].map((testimonial, index) => (
-              <div key={`${testimonial.id}-${index}`} className="flex-shrink-0">
+              <div key={`${testimonial.name}-${index}`} className="flex-shrink-0">
                 <TestimonialCard testimonial={testimonial} />
               </div>
             ))}

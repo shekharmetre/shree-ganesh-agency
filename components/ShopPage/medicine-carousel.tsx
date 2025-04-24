@@ -72,9 +72,9 @@ export default function MedicineCarousel() {
         <div className="overflow-x-auto max-w-7xl mx-auto whitespace-nowrap py-4">
             <h1 className="text-3xl font-semibold font-serif mb-5">New Brands</h1>
             <div className="flex space-x-4 px-4">
-                {medicineData.map((medicine) => (
+                {medicineData.map((medicine,index) => (
                     <div
-                        key={medicine.id}
+                        key={index}
                         className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow min-w-[250px]"
                     >
                         <img

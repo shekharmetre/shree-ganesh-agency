@@ -63,7 +63,7 @@ export function Worker() {
             <div className="flex md:grid md:grid-cols-3 lg:grid-cols-5 gap-5 overflow-x-auto md:overflow-x-hidden px-4">
                 {pharmaDistributorWorkers.map((item, index) => (
                     <motion.div
-                        key={index}
+                        key={item.name}
                         className="min-w-[200px] flex-shrink-0 md:flex-shrink"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}

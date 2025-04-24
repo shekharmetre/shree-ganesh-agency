@@ -33,7 +33,7 @@ export function MobileView({
   return (
     <div className="md:hidden space-y-4">
       {items.map((item) => (
-        <Card key={item.id} className={cn(expandedItems[item.id] && "border-primary/50")}>
+        <Card key={item.name} className={cn(expandedItems[item.id] && "border-primary/50")}>
           <CardContent className="p-0">
             <div className="p-4 cursor-pointer" onClick={() => toggleItem(item.id)}>
               <div className="flex justify-between items-start mb-2">

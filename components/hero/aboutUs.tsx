@@ -47,7 +47,7 @@ const AboutUsSection: React.FC = () => {
                   { value: "Over a Million", label: "Orders Fulfilled", desc: "Ensuring seamless and timely delivery of medicines to medical stores." },
                 ].map((stat, index) => (
                   <motion.div
-                    key={index}
+                    key={stat?.value}
                     className="w-full p-4 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex flex-col items-center lg:items-start"
                     variants={fadeInUp}
                   >
