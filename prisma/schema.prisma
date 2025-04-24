@@ -25,7 +25,6 @@ model User {
   id         Int      @id @default(autoincrement())
   name       String
   email      String   @unique
-  password   String?
   avatar     String?
   address    String?
   phone      String   @unique
@@ -41,23 +40,32 @@ model User {
 
 model Agent {
   id         String            @id @default(uuid()) // Ensure `id` is the primary key
-  agentName  String
+  agentUsername  String    @unique
   agentEmail String            @unique
-  password   String
+  authId     String   @unique
   retailers  User[] // Establish a one-to-many relationship with retailers
   createdAt  DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
 }
 
+
+
+enum OrderStatus {
+  PENDING
+  VERIFIED
+  DISPATCHED
+  COMPLETED
+  CANCELLED
+}
+
+
 model Order {
   id         Int             @id @default(autoincrement()) // Added `@id`
   retailerId Int // Changed `String` to `Int` to match `MedicalRetailer.id`
   retailer   User @relation(fields: [retailerId], references: [id])
-
+  status    OrderStatus
   items      Json
-  qty        Int
   totalPrice Float // Fixed capitalization of `TotalPrice`
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt // Ensure consistency
 }

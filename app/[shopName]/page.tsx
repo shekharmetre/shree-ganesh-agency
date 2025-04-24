@@ -37,9 +37,9 @@ const access_token = "sdfasfdsdfsafd"
 
       <div className="md:flex md:gap-2">
         {/* Product section can be uncommented when ready */}
-        {/* <div>
-          <ProductPage />
-        </div> */}
+        <div>
+          {/* <ProductPag /> */}
+        </div>
       </div>
       <div className="hidden md:block">
         <LiveOrderSummary />
