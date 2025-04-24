@@ -38,6 +38,7 @@
     "clsx": "^2.1.1",
     "cookies-next": "^5.1.0",
     "crypto-js": "^4.2.0",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.4.2",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.474.0",
@@ -60,6 +61,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@faker-js/faker": "^9.7.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20.17.16",

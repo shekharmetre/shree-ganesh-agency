@@ -1,12 +1,49 @@
+'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion } from "framer-motion"; // Import Framer Motion
+import { AgentWithLatestRetailerOrdersType } from "@/types/schema.types";
+import { StatusBadge } from "@/components/ui/statusBadge";
+import { useState } from "react";
+import { MedicineInventory } from "@/components/products/medicines";
 
-import { Badge } from "primereact/badge"
-import { Orders } from "@/public/assets/data"
+export function RecentOrders({ initialData }: { initialData: AgentWithLatestRetailerOrdersType | null }) {
+    const [expandedRow, setExpandedRow] = useState<number | null>(null);
+    const [instialData, setInitialData] = useState(initialData)
 
-export function RecentOrders() {
+    const toggleRow = (id: number) => {
+        setExpandedRow(prev => (prev === id ? null : id));
+    };
+    // Animation variants for the table rows
+    if (!initialData) {
+        return <div>Loading....</div>
+    }
+
+    const rowVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: (i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: i * 0.05, // Staggered animation
+                duration: 0.5,
+                ease: "easeOut",
+            },
+        }),
+    };
+
+    function onQtyChange(item, value) {
+        setInitialData((prev) => ({
+            ...prev,
+            retailers: prev?.retailers.map((r) =>
+                r.id === item.id ? { ...r, qty: value } : r
+            ),
+        }));
+    }
+
+
     return (
         <Card>
             <CardHeader className="pb-2">
@@ -32,39 +69,71 @@ export function RecentOrders() {
                             </tr>
                         </thead>
                         <tbody>
-                            {Orders.map((order) => (
-                                <tr
-                                    key={order.id}
-                                    className="border-b border-gray-200 dark:border-gray-700"
-                                >
-                                    <td className="py-3 px-4">{order.id}</td>
-                                    <td className="py-3 px-4">
-                                        <div className="flex items-center">
-                                            <Avatar className="h-6 w-6 mr-2">
-                                                <AvatarImage src="/placeholder.svg?height=24&width=24" alt="Avatar" />
-                                                <AvatarFallback>{order.avatarFallback}</AvatarFallback>
-                                            </Avatar>
-                                            <span>{order.retailer}</span>
-                                        </div>
-                                    </td>
-                                    <td className="py-3 px-4">{order.date}</td>
-                                    <td className="py-3 px-4">{order.amount}</td>
-                                    <td className="py-3 px-4">
-                                        <Badge className={order.statusClass}>{order.status}</Badge>
-                                    </td>
-                                    <td className="py-3 px-4">
-                                        <Button variant="ghost" size="sm">
-                                            View
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            {instialData && instialData.retailers
+                                .filter(retailer => retailer.orders.length > 0) // only show retailers who have orders
+                                .map((retailer, index) => {
+                                    const latestOrder = retailer.orders[0]; // assuming ordered by createdAt desc
+                                    const isExpanded = expandedRow === latestOrder.id;
+                                    return (
+                                        <>
+                                            <motion.tr
+                                                key={retailer.id}
+                                                className="border-b border-gray-200 dark:border-gray-700"
+                                                variants={rowVariants}
+                                                initial="hidden"
+                                                animate="visible"
+                                                custom={index}
+                                                onClick={() => toggleRow(latestOrder.id)}
+                                            >
+                                                <td className="py-3 px-4">#{latestOrder.id}</td>
+                                                <td className="py-3 px-4">
+                                                    <div className="flex items-center">
+                                                        <Avatar className="h-6 w-6 mr-2">
+                                                            <AvatarImage src={retailer.avatar || "/placeholder.svg"} alt="Avatar" />
+                                                            <AvatarFallback>{retailer.name[0]}</AvatarFallback>
+                                                        </Avatar>
+                                                        <span>{retailer.name}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="py-3 px-4">
+                                                    {new Date(latestOrder.createdAt).toLocaleDateString()}
+                                                </td>
+                                                <td className="py-3 px-4">{latestOrder.totalPrice}</td>
+                                                <td className="py-3 px-4">
+                                                    <StatusBadge status={latestOrder.status.toLowerCase()} />
 
+                                                </td>
+                                                <td className="py-3 px-4">
+                                                    <Button variant="secondary" size="sm">
+                                                        View
+                                                    </Button>
+                                                </td>
+                                            </motion.tr>
+                                            {
+                                                isExpanded && (
+                                                    <motion.tr
+                                                        initial={{ opacity: 0, height: 0 }}
+                                                        animate={{ opacity: 1, height: "auto" }}
+                                                        exit={{ opacity: 0, height: 0 }}
+                                                        transition={{ duration: 0.3 }}
+                                                    >
+                                                        <td colSpan={6} className="px-4 py-3 bg-gray-50 dark:bg-gray-900 text-sm text-gray-700 dark:text-gray-300">
+                                                            {/* Extra content here */}
+                                                            <MedicineInventory onQtyChange={onQtyChange} items={latestOrder.items} />
+                                                        </td>
+                                                    </motion.tr>
+                                                )
+                                            }
+
+                                        </>
+                                    );
+                                })}
+                        </tbody>
+
+
+                    </table>
                 </div>
             </CardContent>
-        </Card>
-
-    )
+        </Card >
+    );
 }
