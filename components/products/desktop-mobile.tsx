@@ -21,7 +21,7 @@ interface DesktopViewProps {
     toggleItem: (id: number) => void;
     isExpiryApproaching: (expiryDate: string) => boolean;
     getStockStatusColor: (status: string) => string;
-    getStockStatusIcon: (status: string) => JSX.Element | null;
+    getStockStatusIcon: (status: string) => React.ReactNode | null;
 }
 
 export function DesktopView({
@@ -159,8 +159,8 @@ export function DesktopView({
                                                                 <div className="bg-amber-50 border border-amber-200 rounded-md p-3 flex items-center gap-2">
                                                                     <Tag className="h-5 w-5 text-amber-600" />
                                                                     <div>
-                                                                        <p className="text-amber-800 text-sm font-medium">{item.offers.type}</p>
-                                                                        <p className="text-amber-800 text-xs">{item.offers.description}</p>
+                                                                        <p className="text-amber-800 text-sm font-medium">{item.offers}</p>
+                                                                     
                                                                     </div>
                                                                 </div>
                                                             )}

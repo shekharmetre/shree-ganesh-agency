@@ -19,7 +19,7 @@ interface MobileViewProps {
   toggleItem: (id: number) => void;
   isExpiryApproaching: (expiryDate: string) => boolean;
   getStockStatusColor: (status: string) => string;
-  getStockStatusIcon: (status: string) => JSX.Element | null;
+  getStockStatusIcon: (status: string) => React.ReactNode | null;
 }
 
 export function MobileView({
@@ -113,8 +113,8 @@ export function MobileView({
                   <div className="bg-amber-50 border border-amber-200 rounded-md p-2 mb-2 flex items-center gap-2">
                     <Tag className="h-4 w-4 text-amber-600" />
                     <div>
-                      <p className="text-amber-800 text-xs font-medium">{item.offers.type}</p>
-                      <p className="text-amber-800 text-xs">{item.offers.description}</p>
+                      {/* <p className="text-amber-800 text-xs font-medium">{item.offers.type}</p> */}
+                      <p className="text-amber-800 text-xs">{item.offers}</p>
                     </div>
                   </div>
                 )}
