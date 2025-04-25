@@ -191,7 +191,7 @@ export default function HeroSection() {
                         { icon: ShieldCheck, title: "Medical Supplies", count: "100+" },
                       ].map((item, i) => (
                         <motion.div
-                          key={i}
+                          key={item?.title}
                           className="p-4 rounded-xl bg-blue-50/50 border border-blue-100"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}

@@ -81,7 +81,7 @@ export function Benefits() {
           variants={containerVariants}
         >
           {benefits.map((benefit, index) => (
-            <motion.div key={index} variants={fadeInUp}>
+            <motion.div key={benefit.title} variants={fadeInUp}>
               <Card>
                 <CardContent className="p-6 text-center">
                   <benefit.icon className="w-12 h-12 text-blue-600 mx-auto mb-4" />

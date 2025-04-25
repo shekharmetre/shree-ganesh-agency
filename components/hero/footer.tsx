@@ -82,11 +82,11 @@ export function Footer() {
 
         <div className="mt-16 grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {footerInfo.map((section, index) => (
-            <div key={index} className="text-center sm:text-left">
+            <div key={section.title} className="text-center sm:text-left">
               <p className="text-lg font-medium text-gray-900">{section.title}</p>
               <ul className="mt-8 space-y-4 text-sm">
                 {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
+                  <li key={link.text}>
                     <a className="text-gray-700 transition hover:text-gray-700/75" href={link.href}>
                       {link.text}
                     </a>
@@ -100,7 +100,7 @@ export function Footer() {
         <div className="mt-16">
           <ul className="flex justify-center gap-6 sm:justify-end">
             {socialLinks.map((social, index) => (
-              <li key={index}>
+              <li key={social.alt}>
                 <a
                   href={social.href}
                   rel="noreferrer"

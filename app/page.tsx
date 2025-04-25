@@ -10,7 +10,7 @@ import AutoScrollingTestimonials from "@/components/hero/testimonial";
 import HowItWorks from "@/components/hero/how-works";
 import MedicineCarousel from "@/components/ShopPage/medicine-carousel";
 import { headers } from 'next/headers';
-import { prisma } from "@/utils/prisma";
+
 
 export default async function Home() {
   const headersList = headers();

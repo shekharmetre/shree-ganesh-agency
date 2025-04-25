@@ -56,7 +56,7 @@ function ProductShowcase({ title, products }: { title: string; products: CartIte
         <div className="relative">
           <div className="flex overflow-x-auto snap-x snap-mandatory pb-6 -mx-4 px-4 space-x-4 scrollbar-hide">
             {products.map((product) => (
-              <div key={product.id} className="snap-start flex-shrink-0">
+              <div key={product.name} className="snap-start flex-shrink-0">
                 <ProductCard product={product} />
               </div>
             ))}

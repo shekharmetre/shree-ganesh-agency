@@ -90,5 +90,5 @@ export interface MedicineItem {
   isNew: boolean
   percentage: number
   category: string
-  offers: Offer | null
+  offers: String | null
 }

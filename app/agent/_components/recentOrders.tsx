@@ -34,15 +34,6 @@ export function RecentOrders({ initialData }: { initialData: AgentWithLatestReta
         }),
     };
 
-    function onQtyChange(item, value) {
-        setInitialData((prev) => ({
-            ...prev,
-            retailers: prev?.retailers.map((r) =>
-                r.id === item.id ? { ...r, qty: value } : r
-            ),
-        }));
-    }
-
 
     return (
         <Card>
@@ -77,7 +68,7 @@ export function RecentOrders({ initialData }: { initialData: AgentWithLatestReta
                                     return (
                                         <>
                                             <motion.tr
-                                                key={retailer.id}
+                                                key={retailer.name}
                                                 className="border-b border-gray-200 dark:border-gray-700"
                                                 variants={rowVariants}
                                                 initial="hidden"
@@ -119,7 +110,7 @@ export function RecentOrders({ initialData }: { initialData: AgentWithLatestReta
                                                     >
                                                         <td colSpan={6} className="px-4 py-3 bg-gray-50 dark:bg-gray-900 text-sm text-gray-700 dark:text-gray-300">
                                                             {/* Extra content here */}
-                                                            <MedicineInventory onQtyChange={onQtyChange} items={latestOrder.items} />
+                                                            <MedicineInventory items={latestOrder.items} />
                                                         </td>
                                                     </motion.tr>
                                                 )
